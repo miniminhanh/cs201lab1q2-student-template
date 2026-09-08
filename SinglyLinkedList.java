@@ -70,7 +70,7 @@ public class SinglyLinkedList<E> {
 
         //return null
         if(isEmpty()){
-            return null;
+            return "";
         }
 
         //string builder for better complexity
