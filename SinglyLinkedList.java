@@ -67,14 +67,90 @@ public class SinglyLinkedList<E> {
 
     // Write your codes below
     public String toString(){
+
+        //return null
+        if(isEmpty()){
+            return null;
+        }
+
+        //string builder for better complexity
+        StringBuilder ans = new StringBuilder();
+
+        Node<E> current = head;
+
+        while (current != null) {
+            ans.append(current.getElement().toString());
+
+            //move current so you are not in an infinite loop
+            current = current.getNext();
+        }
+
+        return ans.toString();
      
     }
 
     public E removeLast(){
+
+        if(isEmpty()){
+            //nothing to remove
+            return null;
+        }
+
+        E answer = tail.getElement();
+
+        if(head == tail){
+            //change to new pointers
+            head = null;
+            tail = null;
+
+        } else {
+            Node<E> walk = head;
+            while(walk.getNext() != tail){
+                //get to the penultimate node
+                walk = walk.getNext();
+            }
+
+            walk.setNext(null);
+            tail = walk; //new tail pointer
+
+        }
+        size--;
+        return answer; //last element
       
     }
 
-    public void reverse(){       
-                 
+    public void reverse(){    
+
+        // commented out for now
+        // if (isEmpty()){
+        //     // Node<E> temp = head;
+        //     // tail = head;
+        //     // head = temp;
+        //     // head.setNext(tail);
+            
+        //     return;
+        // }
+        
+        Node<E> prev = null;
+        Node<E> curr = head;
+        //curr is head so we add from the front
+
+        //remember to change your tail pointer as well
+        tail = head;
+
+        while (curr != null){
+            //get the next node
+            //make sure that you are getting the next node from curr, 
+            //not head(which does not change)
+            Node<E> next = curr.getNext();
+            curr.setNext(prev);
+            
+            prev = curr;
+            curr = next;
+
+        }
+
+        head = prev;
+                     
     }
 }
